@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<mosinstall version="2.9" type="mambot" group="content">
+
+	<name>Google Maps</name>
+
+	<author>Mike Reumer</author>
+
+	<creationDate>september 2007</creationDate>
+
+	<copyright>(C) 2007 Reumer</copyright>
+
+	<license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+
+	<authorEmail>tech@reumer.net</authorEmail>
+
+	<authorUrl>tech.reumer.net</authorUrl>
+
+	<version>2.9</version>
+
+	<description>
+		<![CDATA[
+<H1>Plugin Googlemap - A Joomla plugin</H1>
+	        <p>This plugin is version 2.9 of the google map mambot for Joomla 1.0x or Joomla 1.5+ with configparameter legacy on. </p>
+	        <h2>Install</h2>
+			<p>Just go to Joomla menu Extensions submenu Install/Uninstall in your administration console. Upload and install the plugin. Then go to Joomla menu Extension submenu Plugin Manager and publish the Plugin Google Maps. </p>
+			<p>After publishing the plugin go to the parameters of the plugin by clicking on the name of the plugin. Here you can set the defaults of the parameters and most important the Google API key (<a href="http://www.google.com/apis/maps/">Click here to have a key</a>)</p>
+			<p>For Joomla 1.5 publish the plugin always. With the plugin parameter Published you can set if the mostag must be removed or that the mostag is replace with the Googlemap.</p>
+	        <h2>How to use the plugin in content</h2>
+	        <p>You can put the {mosmap} with parameters anywhere in content in  Joomla: intro text or main text. You can see examples and documentation on my demo site: <a href="http://tech.reumer.net" target="_blank">tech.reumer.net</a>.</p>
+			<p>Check the html of the content item so there are no &lt;br /&gt; or &amp;nbsp; between { } or in the html a return. <br />The plugin works for one line!  It can be once, twice or more to display multiple, inline maps on a  single content page for different locations and configurations. </p>
+	        <p>Usage:  {mosmap  width='500'|height='400'|lat='52.052312'|lon='4.447141'|<br />zoom='3'|zoomType='Large'|zoomNew='0'|mapType='Satellite'|showMaptype='1'|<br />
+overview='0'|text='sv  DWO'|tooltip='DWO'|marker='1'|<br />
+align='center'|key='googlekey'} <br />
+(remove the returns between the line or &lt;br /&gt; so its one line</p>
+	        <p>You can change any of the parameters:</p>
+			<p>width, height	to whatever you want although if its too small, you won't see very much.
+			<br />You must put the units behind the number like 100% or 400px</p>
+			<p>lon, lat for the coordinates or address to search for the coordinates (should consist of street number, zipcode town, country)</p>
+	        <p>zoom can be anything as specified in the Google Maps API. </p>
+	        <p>zoomType, can be Small or Large, this controls the type of zoom function displayed or None so there is no zoomcontrol. </p>
+			<p>zoomNew, can be 1 for continues zoom and doubleclick and zoom or 0 for click to center (default 0)</p>
+			<p>zoomWheel, can be 1 for mousewheel zoom and 0 for no mousewheel zoom (default 0)</p>
+	        <p>mapType can be Normal (default), Satellite or Hybrid. </p>
+			<p>showMaptype is 0 for no Maptype controls and 1 shows Maptype controls (default 1)</p>
+			<p>Overview is 0 for no overview window in bottom right corner and 1 shows the overview and 2 for overview enabled but close initially (default 0)</p>
+	        <p>text is for the marker, that will show on the map with a balloon. If  you don't want to see the text, just set text=&quot; and it will not  display, the text is the data displayed above the location pin. Usually  it would be used to display an address or hyperlink.
+			A hyperlink is possible use the format: &lt;a href=linkAddress target=linkTarget title=linkTitle&gt;linkName&lt;/a&gt;. Don't use (double) quotes!</p>
+			<p>marker is for opening the infowindow (1 default) or close the infowindow (0) initially. </p>
+			<p>dir for adding get directions form for a route at maps.google.com to the coordinates. </p>
+			<p>tooltip is for the marker to have a tooltip when the mouse is on the marker (don't use HTML)</p>
+			<p>address is for a address to search for the coordinates (lon/lat has to be empty)</p>
+			<p>gotoaddr is for a searchfield and button so the user can search a address on the map (default 0)</p>
+			<p>kml is for a url to a kmlfile to load as a overlay on the map for multiple markers or a route</p>
+			<p>align is for placement of the map in the content (left, right or center)</p>
+			<p>lang is for the language of the maps.</p>
+	        <p>key is for the google map api key. You can set the key in the mosmap tag (optional) or Multiple urls and keys at the parameters by the plugin in the administrator of Joomla. You can register for a Google Maps Key <a target="wikiext" href="http://www.google.com/apis/maps/">here</a>. </p>
+		]]>
+	</description>
+
+	<files>
+
+		<filename mambot="plugin_googlemap2">plugin_googlemap2.php</filename>
+
+	</files>
+	<params>
+		<param name="publ" type="radio" size= "1" default="0" label="Published?" description="Published? (Only for Joomla 1.5 to remove tag)">
+		<option value="1">Yes</option>
+		<option value="0">No</option>
+		</param>
+		<param name="debug" type="radio" size= "1" default="0" label="Debug?" description="Debug the plugin and show log-comments?">
+		<option value="1">Yes</option>
+		<option value="0">No</option>
+		</param>
+		<param name="Google_API_key" type="text" size= "40" default="" label="Google API key" description="The key that's needed for using the Google API. Leave blank for multi website below." />
+		<param name="Google_Multi_API_key" type="textarea" rows="5" cols="40" default="" label="Google Multi API key" description="For a number of website needs different keys. Enter website;key for each website on new line" />
+		<param name="width" type="text" size= "10" default="100%" label="Width" description="Width of the map. You must put the units behind the number like 100% or 400px" />
+		<param name="height" type="text" size= "10" default="400px" label="Height" description="Height of the map. You must put the units behind the number like 100% or 400px" />
+		<param name="lat" type="text" size= "15" default="52.075581" label="Latitude" description="Lattitude for the default place" />
+		<param name="lon" type="text" size= "15" default="4.541513" label="Longitude" description="Longitude for the default place" />
+		<param name="zoom" type="list" size= "2" default="10" label="Zoomlevel" description="The zoomlevel for the first view of the map">
+		<option value="19">19</option>
+		<option value="18">18</option>
+		<option value="17">17</option>
+		<option value="16">16</option>
+		<option value="15">15</option>
+		<option value="14">14</option>
+		<option value="13">13</option>
+		<option value="12">12</option>
+		<option value="11">11</option>
+		<option value="10">10</option>
+		<option value="9">9</option>
+		<option value="8">8</option>
+		<option value="7">7</option>
+		<option value="6">6</option>
+		<option value="5">5</option>
+		<option value="4">4</option>
+		<option value="3">3</option>
+		<option value="2">2</option>
+		<option value="1">1</option>
+		</param>
+		<param name="zoomType" type="radio" size= "5" default="Large" label="Zoomtype" description="The type of button for zoom on the map. Zoomtype can be Small, Large or None so there is no zoomcontrol.">
+		<option value="Large">Large</option>
+		<option value="Small">Small</option>
+		<option value="None">None</option>
+		</param>
+		<param name="zoomNew" type="radio" size= "1" default="0" label="Doubleclick and Continues zoom" description="Give the use doubleclick zoom and smooth zooming?">
+		<option value="1">Yes</option>
+		<option value="0">No</option>
+		</param>
+		<param name="zoomWheel" type="radio" size= "1" default="0" label="Mousewheel zoom" description="Zoom map with mousewheel?">
+		<option value="1">Yes</option>
+		<option value="0">No</option>
+		</param>
+		<param name="mapType" type="radio" size= "9" default="Normal" label="Maptype" description="The first view of the map will be this type. Maptype can be Normal (default), Satellite or Hybrid.">
+		<option value="Normal">Normal</option>
+		<option value="Satellite">Satellite</option>
+		<option value="Hybrid">Hybrid</option>
+		</param>
+		<param name="showMaptype" type="radio" size= "1" default="1" label="Show Maptype" description="Show the buttons for maptype?">
+		<option value="1">Yes</option>
+		<option value="0">No</option>
+		</param>
+		<param name="overview" type="radio" size= "1" default="0" label="Overview" description="Show a small overview of the map in the lower right bottom corner">
+		<option value="1">Enabled</option>
+		<option value="0">Disabled</option>
+		<option value="2">Enabled closed</option>
+		</param>
+		<param name="marker" type="radio" size= "1" default="1" label="Infowindow" description="If infowindow is open or closed initially?">
+		<option value="1">Open</option>
+		<option value="0">Closed</option>
+		</param>
+		<param name="dir" type="radio" size= "1" default="0" label="Directionsform" description="If in a infowindow the direction form is added?">
+		<option value="1">Directions</option>
+		<option value="0">No directions</option>
+		</param>
+		<param name="txtdir" type="textarea" rows="1" cols="40" default="Directions: " label="Title directions" description="The title of the directions form" />
+		<param name="txtgetdir" type="textarea" rows="1" cols="40" default="Get Directions" label="Button directions" description="The text in the button of the directions form" />
+		<param name="txtfrom" type="textarea" rows="1" cols="40" default="From here" label="Text from directions" description="The text for the from option in the directionsform" />
+		<param name="txtto" type="textarea" rows="1" cols="40" default="To here" label="Text to directions" description="The text for the to option in the directionsform" />
+		<param name="txtdiraddr" type="textarea" rows="1" cols="40" default="Address: " label="Text label address" description="The text for the field with address in the directionsform" />
+		<param name="gotoaddr" type="radio" size= "1" default="0" label="Field gotoaddress" description="Show a searchfield and button so the user can search a address on the map">
+		<option value="1">Open</option>
+		<option value="0">Closed</option>
+		</param>
+		<param name="txtaddr" type="textarea" rows="3" cols="40" default="Address: ##" label="Address infowindow text" description="The text in the infowindow. Place ## where you want the entered address" />
+		<param name="erraddr" type="textarea" rows="3" cols="40" default="Address ## not found!" label="Address error text" description="The text in the alert box. Place ## where you want the entered address" />
+		<param name="align" type="list" size= "10" default="center" label="Map align" description="Alignment of the map in the content">
+		<option value="left">left</option>
+		<option value="center">center</option>
+		<option value="right">right</option>
+		</param>
+		<param name="langtype" type="list" size= "10" default="center" label="Language setting type" description="If the language should be determined from the site language, setting below or the user. Can be override as a parameter of plugin.">
+		<option value="site">Site</option>
+		<option value="config">Config</option>
+		<option value="user">User</option>
+		</param>
+		<param name="lang" type="text" size= "3" default="" label="Language" description="Language for the buttons on the map. leave blank for user language."/>
+	</params>
+
+</mosinstall>
